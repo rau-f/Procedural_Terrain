@@ -5,13 +5,34 @@ project(procedural_terrian)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Fix OpenGL warning (prefer modern OpenGL)
+# find system-installed GLFW first
+find_package(glfw3 QUIET)
+
+include(FetchContent)
+
+if (NOT glfw3_FOUND)
+    FetchContent_Declare(
+        glfw
+        GIT_REPOSITORY https://github.com/glfw/glfw.git
+        GIT_TAG        3.3.8
+    )
+    FetchContent_MakeAvailable(glfw)
+endif()
+
+if (NOT glad_FOUND)
+    FetchContent_Declare(
+        glad
+        GIT_REPOSITORY https://github.com/Dav1dde/glad.git
+        GIT_TAG master
+    )
+    FetchContent_MakeAvailable(glad)
+endif()
+
 cmake_policy(SET CMP0072 NEW)
 set(OpenGL_GL_PREFERENCE "GLVND")
 
 # Find OpenGL and GLFW
 find_package(OpenGL REQUIRED)
-find_package(glfw3 REQUIRED)
 
 # Add executable
 add_executable(procdural_terrain
