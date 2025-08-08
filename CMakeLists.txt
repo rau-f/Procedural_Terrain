@@ -1,0 +1,41 @@
+cmake_minimum_required(VERSION 3.10)
+project(procedural_terrian)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Fix OpenGL warning (prefer modern OpenGL)
+cmake_policy(SET CMP0072 NEW)
+set(OpenGL_GL_PREFERENCE "GLVND")
+
+# Find OpenGL and GLFW
+find_package(OpenGL REQUIRED)
+find_package(glfw3 REQUIRED)
+
+# Add executable
+add_executable(procdural_terrain
+    src/main.cpp
+    src/glad.c
+    src/IndexBuffer.cpp
+    src/VertexBuffer.cpp
+    src/VertexArray.cpp
+    src/Renderer.cpp
+    src/shaders.cpp
+    src/errors.cpp
+    src/Texture.cpp
+    src/stb_image.cpp
+    src/Mesh.cpp
+    src/PerlinNoise.cpp
+    src/Camera.cpp
+    src/Terrain.cpp
+    src/utils.cpp
+    src/Skybox.cpp
+)
+
+# Include directories
+target_include_directories(procdural_terrain PRIVATE include)
+include_directories(${CMAKE_SOURCE_DIR}/src/include)
+
+# Link libraries
+target_link_libraries(procdural_terrain glfw OpenGL::GL)
