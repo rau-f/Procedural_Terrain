@@ -46,8 +46,7 @@ void main()
     }
     else if (scaledHeight < grassLevel)
     {
-        finalColor = grass;   color = vec4(result, 1.0f);
-
+        finalColor = grass;
     }
     else if (scaledHeight < rockLevel)
     {
