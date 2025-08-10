@@ -1,8 +1,7 @@
 #include "include/utils.hpp"
 
 //             POSITION                       UP                        YAW   PITCH
-Camera camera(glm::vec3(0.0f, 4.5f, 20.0f), glm::vec3(0.0f, 0.25f, 0.0f), -5.0f, 30.0f);
-
+Camera camera(glm::vec3(5.0f, 6.0f, 20.0f), glm::vec3(0.0f, 1.0f, 0.0f), -0.1f, 0.0f);
 
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
@@ -43,4 +42,17 @@ void process_input(GLFWwindow* window, float& deltaTime, float& lastFrame)
         camera.keyBoardInput(GLFW_KEY_S, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.keyBoardInput(GLFW_KEY_D, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+        camera.keyBoardInput(GLFW_KEY_E, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+        camera.keyBoardInput(GLFW_KEY_Q, deltaTime);
+
+    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+        camera.keyBoardInput(GLFW_KEY_LEFT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        camera.keyBoardInput(GLFW_KEY_RIGHT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+        camera.keyBoardInput(GLFW_KEY_UP, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+        camera.keyBoardInput(GLFW_KEY_DOWN, deltaTime);
 }

@@ -9,8 +9,6 @@ uniform mat4 u_Model;
 uniform mat4 u_View;
 uniform mat4 u_Projection;
 
-// out vec2 v_TexCoord;
-// flat out vec3 v_Color;
 out float v_Height;
 out vec3 v_Normal;
 out vec3 v_FragPos;

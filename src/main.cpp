@@ -32,17 +32,17 @@ int main()
 
     // const int screenHeight = 600, screenWidth = 800;
     // GLFWwindow* window = glfwCreateWindow(screenWidth, screenHeight, "Practice", NULL, NULL);
-    // if (window == NULL)
-    // {
-    //     std::cout << "Failed to initialize window!" << std::endl;
-    //     return -1;
-    // }
-        
+    
     GLFWmonitor* primary = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(primary);
     GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Procedural Terrain", primary, nullptr);
+    
+    if (window == NULL)
+    {
+        std::cout << "Failed to initialize window!" << std::endl;
+        return -1;
+    }
     glfwMakeContextCurrent(window);
-
     gladLoadGL();
     
     glEnable(GL_DEPTH_TEST);
@@ -52,7 +52,7 @@ int main()
     GLCall(glViewport(0, 0, mode->width, mode->height));
     glfwSwapInterval(1);
 
-    Terrain terrain(2000, 2000);
+    Terrain terrain(1200, 1200);
     terrain.getShader().CreateShader("../res/shaders/default.vert", "../res/shaders/default.frag");
     terrain.sendToGPU();
 
@@ -60,16 +60,16 @@ int main()
     skybox.loadToGPU();
 
     float aspectRatio = (float)mode->width / (float)mode->height;
-    // float aspectRatio = 800 / 600;
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 10000.0f);
+    // float aspectRatio = screenWidth / screenHeight;
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPosCallback(window, mouse_callback);
-
+    
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;
-
+    
     Renderer renderer;
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 10000.0f);
 
     while (!glfwWindowShouldClose(window))
     {

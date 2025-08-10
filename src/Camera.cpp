@@ -22,14 +22,28 @@ void Camera::keyBoardInput(unsigned int direction, float deltaTime)
 {
     float velocity = Speed * deltaTime;
 
-    if (direction == GLFW_KEY_W)
+    if (direction == GLFW_KEY_W)        // W
         Position += Front * velocity;
-    if (direction == GLFW_KEY_A)
+    if (direction == GLFW_KEY_A)        // A
         Position -= Right * velocity;
-    if (direction == GLFW_KEY_D)
+    if (direction == GLFW_KEY_D)        // D
         Position += Right * velocity;
-    if (direction == GLFW_KEY_S)
+    if (direction == GLFW_KEY_S)        // S
         Position -= Front * velocity;
+    if (direction == GLFW_KEY_E)        // E
+        Position += Up * velocity;
+    if (direction == GLFW_KEY_Q)        // Q
+        Position -= Up * velocity;
+
+    if (direction == GLFW_KEY_LEFT)
+        mouseInput(-10.0f, 0.0f);
+    if (direction == GLFW_KEY_RIGHT)
+        mouseInput(10.0f, 0.0f);
+    if (direction == GLFW_KEY_UP)
+        mouseInput(0.0f, 10.0f);
+    if (direction == GLFW_KEY_DOWN)
+        mouseInput(0.0f, -10.0f);
+
 }
 
 
@@ -62,8 +76,13 @@ void Camera::UpdateCamera()
     front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
     front.y = sin(glm::radians(Pitch));
     front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+    
     Front = glm::normalize(front);
-
     Right = glm::normalize(glm::cross(Front, WorldUp));
     Up = glm::normalize(glm::cross(Right, Front));
+
+    // const double PI = 3.14159;
+
+    // std::cout << ((glm::acos(glm::dot(glm::vec3(0.0, 0.0f, -1.0f), Up)) / PI) * 360) << ", "
+    //     << ((glm::acos(glm::dot(glm::vec3(0.0, 0.0f, -1.0f), Right)) / PI) * 360) << std::endl;
 }
