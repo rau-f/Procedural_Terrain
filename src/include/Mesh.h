@@ -15,21 +15,9 @@
 #include "shaders.h"
 
 
-struct Vertex
-{
-    glm::vec3 position;
-    glm::vec3 normal;
-    // glm::vec2 texture;
-    // glm::vec3 color;
-};
-
-
 class Mesh
 {
 protected:
-    std::vector<Vertex> m_Vertices;
-    std::vector<unsigned int> m_Indices;
-
     VertexArray m_VA;
     VertexBuffer m_VB;
     IndexBuffer m_IB;
@@ -42,12 +30,9 @@ public:
     virtual void genVertices() = 0;
     virtual void genIndices() = 0;
     virtual void render(glm::mat4& view, glm::mat4& projection) = 0;
-
-    void genNormals();
-    virtual void sendToGPU();
-
-    std::vector<Vertex>& getVertices();
-    std::vector<unsigned int>& getIndices();
+    virtual void genNormals() = 0;
+    virtual void sendToGPU() = 0;
+    
     VertexArray& getVA();
     IndexBuffer& getIB();
     Shader& getShader();
